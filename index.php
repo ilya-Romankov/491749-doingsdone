@@ -3,12 +3,12 @@
 $show_complete_tasks = rand(0, 1);
 $categorys=["Всё","Входящие", "Учёба","Работа"];
 $tasks= [
-    ["task"=>"Собеседование в IT комании","date"=>"01.06.2018","category"=>"Работа","done"=>"Нет"],
-    ["task"=>"Выполнить тестовое задание","date"=>"25.05.2018","category"=>"Работа","done"=>"Нет"],
-    ["task"=>"Сделать задание первого раздела","date"=>"21.04.2018","category"=>"Учёба","done"=>"Да"],
-    ["task"=>"Встреча с другоми","date"=>"22.04.2018","category"=>"Входящие","done"=>"Нет"],
-    ["task"=>"Купить корм для кота","date"=>"Нет","category"=>"Домашние дела","done"=>"Нет"],
-    ["task"=>"Заказать пиццу","date"=>"Нет","category"=>"Работа","done"=>"Нет"]
+    ["task" => "Собеседование в IT комании","date" => "01.06.2018","category" => "Работа","done" => "Нет"],
+    ["task" => "Выполнить тестовое задание","date" => "25.05.2018","category" => "Работа","done" => "Нет"],
+    ["task" => "Сделать задание первого раздела","date" => "21.04.2018","category" => "Учёба","done" => "Да"],
+    ["task" => "Встреча с другоми","date" => "22.04.2018","category" => "Входящие","done" => "Нет"],
+    ["task" => "Купить корм для кота","date" => "Нет","category" => "Домашние дела","done" => "Нет"],
+    ["task" => "Заказать пиццу","date" => "Нет","category" => "Работа","done" => "Нет"]
 ];
 $filtered_tasks=[];
 $category_active = 0;
@@ -67,7 +67,7 @@ if ($show_complete_tasks == 1){
                     <ul class="main-navigation__list">
                     <!--Вывод меню --> 
                     <?php foreach($categorys as $category_index => $category):?>
-                        <li class="main-navigation__list-item<?= ($category_active == $category_index) ? '--active' : '' ?>">
+                        <li class="main-navigation__list-item<?= ($category_active == $category_index) ? ' main-navigation__list-item--active' : '' ?>">
                             <a class="main-navigation__list-item-link" href="#"><?= $category;?></a>
                             <span class="main-navigation__list-item-count">24</span>
                         </li>
@@ -106,19 +106,16 @@ if ($show_complete_tasks == 1){
                 <table class="tasks">
                     <?php foreach($tasks as  $task):?>
                     <tr class="tasks__item task <?php if($task['done'] == "Да") echo "task--completed";?> ">
-                        <td class="task__select">
+                       <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
                                 <span class="checkbox__text"><?= $task['task'];?></span>
                             </label>
                         </td>
-                       <td class="task__date"><?= $task['date'];?></td>
                         <td class="task__file">
-                            <?= $task['category'];?>
+                            <a class="download-link" href="#">Home.psd</a>
                         </td>
-                        <td class="task__file">
-                            <?= $task['done'];?>
-                        </td>
+                        <td class="task__date"><?= $task['date'];?></td>
                     </tr>
                     <?php endforeach;?>
                 </table>
