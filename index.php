@@ -10,7 +10,8 @@ $tasks= [
     ["task" => "Купить корм для кота","date" => "Нет","category" => "Домашние дела","done" => "Нет"],
     ["task" => "Заказать пиццу","date" => "Нет","category" => "Работа","done" => "Нет"]
 ];
-$filtered_tasks=[];
+//Показ выполненных задач
+$filtered_tasks = [];
 $category_active = 0;
 if ($show_complete_tasks == 1){
     foreach ($tasks as  $task) {
@@ -21,6 +22,20 @@ if ($show_complete_tasks == 1){
     }
     $tasks = $filtered_tasks;
 }
+//Функция для подсчёта задач
+function tasks_count($massiv_tasks , $project_name) {
+    $index_coincidence = 0;
+    if ($project_name == "Всё")  {
+        return count($massiv_tasks);
+    }
+    foreach ($massiv_tasks as  $task) {
+        if ($task['category'] == $project_name) {
+            $index_coincidence++;
+        }
+   }  
+   return $index_coincidence;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -69,7 +84,7 @@ if ($show_complete_tasks == 1){
                     <?php foreach($categorys as $category_index => $category):?>
                         <li class="main-navigation__list-item<?= ($category_active == $category_index) ? ' main-navigation__list-item--active' : '' ?>">
                             <a class="main-navigation__list-item-link" href="#"><?= $category;?></a>
-                            <span class="main-navigation__list-item-count">24</span>
+                            <span class="main-navigation__list-item-count"><?= tasks_count($tasks, $category);?></span>
                         </li>
                     <?php endforeach;?>
                     </ul>
