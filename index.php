@@ -25,20 +25,17 @@ if ($show_complete_tasks == 1){
 //Функция для подсчёта задач
 function tasks_count($massiv_tasks , $project_name) {
     $index_coincidence = 0;
-    $all_task = 0;
-    foreach ($massiv_tasks as  $high_masivs) {
-        foreach ($high_masivs as  $low_massiv) {
-            if ($low_massiv == $project_name) {
-                $index_coincidence++;
-            }
+    if ($project_name == "Всё") {
+        return count($massiv_tasks);
+    }
+    foreach ($massiv_tasks as  $task) {
+        if ($task['category'] == $project_name) {
+            $index_coincidence++;
         }
-        $all_task++;
-   }
-   if ($project_name == "Всё") {
-    return $all_task;
-}
+   }  
    return $index_coincidence;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
