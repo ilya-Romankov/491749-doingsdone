@@ -25,7 +25,7 @@ if ($show_complete_tasks == 1){
 //Функция для подсчёта задач
 function tasks_count($massiv_tasks , $project_name) {
     $index_coincidence = 0;
-    if ($project_name == "Всё") {
+    if ($project_name == "Всё")  {
         return count($massiv_tasks);
     }
     foreach ($massiv_tasks as  $task) {
