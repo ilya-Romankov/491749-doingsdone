@@ -5,6 +5,6 @@
         }
         ob_start();
         extract($massiv_data);
-        require ($path);
+        require($path);
         return ob_get_clean();
     }

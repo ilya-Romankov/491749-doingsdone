@@ -41,11 +41,11 @@
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                    <!--Вывод меню --> 
+                    <!--Вывод меню -->
                     <?php foreach($categorys as $category_index => $category):?>
                         <li class="main-navigation__list-item<?= ($category_active == $category_index) ? ' main-navigation__list-item--active' : '' ?>">
-                            <a class="main-navigation__list-item-link" href="#"><?= $category;?></a>
-                            <span class="main-navigation__list-item-count">24</span>
+                            <a class="main-navigation__list-item-link" href="#"><?= $category ;?></a>
+                            <span class="main-navigation__list-item-count"><?= tasks_count($tasks, $category);?></span>
                         </li>
                     <?php endforeach;?>
                     </ul>
