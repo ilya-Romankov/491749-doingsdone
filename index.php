@@ -1,5 +1,5 @@
 <?php
-require ('function.php');
+require_once ('function.php');
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 $categorys=["Всё","Входящие","Учёба","Работа"];
@@ -22,22 +22,6 @@ if ($show_complete_tasks == 1){
     }
     $tasks = $filtered_tasks;
 }
-//Функция для подсчёта задач
-function tasks_count($massiv_tasks , $project_name) {
-    $index_coincidence = 0;
-
-    if ($project_name == "Всё")  {
-        return count($massiv_tasks);
-    }
-    foreach ($massiv_tasks as  $task) {
-        if ($task['category'] == $project_name) {
-            $index_coincidence++;
-        }
-    }
-    return $index_coincidence;
-}
-
-
 
 $index = output_page('template/index.php',[
         'show_complete_tasks' =>$show_complete_tasks ,
@@ -46,6 +30,7 @@ $index = output_page('template/index.php',[
 $layout = output_page('template/layout.php', [
         'name_page' =>  'Дела в порядке',
         'categorys' => $categorys,
+        'category_active' => $category_active,
         'content' => $index,
         'tasks' => $tasks
 ]);
