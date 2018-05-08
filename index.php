@@ -11,7 +11,8 @@ $tasks= [
     ["task" => "Купить корм для кота","date" => "Нет","category" => "Домашние дела","done" => "Нет"],
     ["task" => "Заказать пиццу","date" => "Нет","category" => "Работа","done" => "Нет"]
 ];
-$filtered_tasks=[];
+//Показ выполненных задач
+$filtered_tasks = [];
 $category_active = 0;
 if ($show_complete_tasks == 1){
     foreach ($tasks as  $task) {
@@ -36,4 +37,3 @@ $layout = output_page('template/layout.php', [
 ]);
 
 print($layout);
-
