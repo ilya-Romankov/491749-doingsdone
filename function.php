@@ -10,7 +10,7 @@ function output_page ($path, $massiv_data) {
     return ob_get_clean();
 }
 
-    //Функция для подсчёта задач
+//Функция для подсчёта задач
 function tasks_count($massiv_tasks , $project_name) {
     $index_coincidence = 0;
 
@@ -24,3 +24,23 @@ function tasks_count($massiv_tasks , $project_name) {
     }
     return $index_coincidence;
 }
+
+//Остались ли сутки до дедлайна
+
+function deadline_date($date_deadline) {
+    $secs_in_day = 86400;
+    if ($date_deadline == "Нет") {
+        return '';
+    }
+    $date_deadline_str = strtotime($date_deadline);
+    $date_div = $date_deadline_str - time();
+    $date_result = floor($date_div / $secs_in_day);
+    if ($date_result < 2 &&  $date_result > 1 ) {
+        return floor($date_result);
+    }
+    return $date_result;
+}
+
+
+
+
