@@ -23,7 +23,7 @@
                     
                 <table class="tasks">
                     <?php foreach($tasks as  $task):?>
-                    <tr class="tasks__item task <?php if(deadline_date($task[date]) == 1) echo "task--important"?> <?php if($task['done'] == "Да") echo "task--completed";?> ">
+                    <tr class="tasks__item task <?php if((deadline_date($task[date]) == true)) echo "task--important"?> <?php if($task['done'] == "Да") echo "task--completed";?> ">
                        <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
