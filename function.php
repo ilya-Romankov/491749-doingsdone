@@ -13,7 +13,6 @@ function output_page ($path, $massiv_data) {
 //Функция для подсчёта задач
 function tasks_count($massiv_tasks , $project_name) {
     $index_coincidence = 0;
-
     if ($project_name == "Всё")  {
         return count($massiv_tasks);
     }
@@ -26,17 +25,18 @@ function tasks_count($massiv_tasks , $project_name) {
 }
 
 //Остались ли сутки до дедлайна
-function deadline_date($date_deadline) {
+function task_imortant($date_deadline) {
     $hours_in_day = 24;
     if ($date_deadline == null) {
         return false;
     }  
-    $date_deadline_str = strtotime($date_deadline);
-    $date_div = $date_deadline_str - time();
+    $date_deadline_in_timestampe = strtotime($date_deadline);
+    $date_div =  $date_deadline_in_timestampe - time();
     $date_result = floor($date_div / (60*60)); // расчёт часов до дедлайна
     if (($date_result <= $hours_in_day) && ($date_result > 0)) {
-        return TRUE;
+        return true;
     } 
+    return false;
 }
 
 
