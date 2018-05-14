@@ -9,7 +9,7 @@ CREATE TABLE projects (
     name_projects CHAR(32)
 );
 
-CREATE INDEX index_id_projects ON projects (id_projects) USING BTREE;
+
 
 CREATE TABLE users (
     id_users INT AUTO_INCREMENT PRIMARY KEY,
