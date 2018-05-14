@@ -9,7 +9,7 @@ CREATE TABLE projects (
     name_projects CHAR(32)
 );
 
-CREATE INDEX index_name_projects ON projects (name_projects) USING BTREE;
+CREATE INDEX index_id_projects ON projects (id_projects) USING BTREE;
 
 CREATE TABLE users (
     id_users INT AUTO_INCREMENT PRIMARY KEY,
@@ -20,8 +20,7 @@ CREATE TABLE users (
     contact_users CHAR(64)
 );
 
-CREATE INDEX index_name_users ON users (name_users) USING BTREE;
-CREATE INDEX index_email_users ON users (email_users) USING BTREE;
+CREATE UNIQUE INDEX index_email_users ON users (email_users) USING BTREE;
 
 CREATE TABLE task (
     id_task INT AUTO_INCREMENT PRIMARY KEY,
@@ -30,15 +29,14 @@ CREATE TABLE task (
     date_create_task DATE,
     date_achievement_task DATE,
     name_task CHAR(64),
+    FULLTEXT index_name_task (name_task),
     file_task VARCHAR(512),
-    term_task INT,
+    term_task DATETIME,
     FOREIGN KEY (id_users)
         REFERENCES users(id_users),
     FOREIGN KEY (id_projects)
         REFERENCES projects(id_projects)   
 ); 
 
-CREATE INDEX index_date_create_task ON task (date_create_task) USING BTREE;
-CREATE INDEX index_date_achievement_task ON task (date_achievement_task) USING BTREE;
-CREATE INDEX index_name_task ON task (name_task) USING BTREE;
+CREATE INDEX index_future_task ON task (date_achievement_task, term_task) USING BTREE;
 CREATE INDEX index_term_task ON task (term_task) USING BTREE;
