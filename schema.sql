@@ -32,6 +32,7 @@ CREATE TABLE task (
     FULLTEXT index_name_task (name_task),
     file_task VARCHAR(512),
     term_task DATETIME,
+    done_task BOOLEAN,
     FOREIGN KEY (id_users)
         REFERENCES users(id_users),
     FOREIGN KEY (id_projects)
@@ -40,3 +41,4 @@ CREATE TABLE task (
 
 CREATE INDEX index_future_task ON task (date_achievement_task, term_task) USING BTREE;
 CREATE INDEX index_term_task ON task (term_task) USING BTREE;
+CREATE INDEX index_done_task ON task (done_task) USING BTREE;
