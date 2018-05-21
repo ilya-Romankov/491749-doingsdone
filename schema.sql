@@ -4,11 +4,6 @@ CREATE DATABASE business_is_all_right
 
 use business_is_all_right;
 
-CREATE TABLE projects (
-    id_projects INT AUTO_INCREMENT PRIMARY KEY,
-    name_projects CHAR(32)
-);
-
 
 
 CREATE TABLE users (
@@ -22,6 +17,14 @@ CREATE TABLE users (
 
 CREATE UNIQUE INDEX index_email_users ON users (email_users) USING BTREE;
 
+CREATE TABLE projects (
+    id_projects INT AUTO_INCREMENT PRIMARY KEY,
+    name_projects CHAR(32),
+    id_users INT,
+     FOREIGN KEY (id_users)
+        REFERENCES users(id_users)
+);
+
 CREATE TABLE task (
     id_task INT AUTO_INCREMENT PRIMARY KEY,
     id_users INT ,
@@ -31,7 +34,7 @@ CREATE TABLE task (
     name_task CHAR(64),
     FULLTEXT index_name_task (name_task),
     file_task VARCHAR(512),
-    term_task DATETIME,
+    term_task DATE,
     done_task BOOLEAN,
     FOREIGN KEY (id_users)
         REFERENCES users(id_users),

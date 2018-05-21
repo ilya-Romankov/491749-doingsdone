@@ -23,17 +23,17 @@
                     
                 <table class="tasks">
                     <?php foreach($tasks as  $task):?>
-                    <tr class="tasks__item task <?php if(task_imortant($task['date'])) echo "task--important"?> <?php if($task['done'] == "Да") echo "task--completed";?> ">
+                    <tr class="tasks__item task <?php if(task_imortant($task['term_task'])) echo "task--important"?> <?php if($task['done_task']) echo "task--completed";?> ">
                        <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text"><?= htmlspecialchars($task['task']);?></span>
+                                <span class="checkbox__text"><?= htmlspecialchars($task['name_task']);?></span>
                             </label>
                         </td>
                         <td class="task__file">
                             <a class="download-link" href="#">Home.psd</a>
                         </td>
-                        <td class="task__date"><?= htmlspecialchars($task['date']);?></td>
+                        <td class="task__date"><?= date("d.m.Y", strtotime(htmlspecialchars($task['term_task'])));?></td>
                     </tr>
                     <?php endforeach;?>
                 </table>

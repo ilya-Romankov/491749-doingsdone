@@ -1,19 +1,23 @@
 <?php
 require_once ('function.php');
-// показывать или нет выполненные задачи
-//Сайт для России, поэтому все значения для даты в ru значениях
-date_default_timezone_set('Europe/Moscow');
-setlocale(LC_ALL, 'ru_RU');
+require_once ('mysql_helper.php');
+require_once ('init.php');
+require_once ('data.php');
+//Подлючаемся к бд
+$connect = mysqli_connect("localhost", "root","","business_is_all_right");
+if (!$connect) {
+    print("ОШибка подключения". mysqli_connect_error());
+}
+
+$user_id = 1;
+
+$categorys = catygorys_db($user_id,  $connect);
+$tasks = task_db($user_id, $connect);
+$count_task_by_user_id = get_count_tasks_by_user(1,$connect);
+
 $show_complete_tasks = rand(0, 1);
-$categorys=["Всё","Входящие","Учёба","Работа"];
-$tasks= [
-    ["task" => "Собеседование в IT комании","date" => "12.05.2018","category" => "Работа","done" => "Нет"],
-    ["task" => "Выполнить тестовое задание","date" => "11.05.2018","category" => "Работа","done" => "Нет"],
-    ["task" => "Сделать задание первого раздела","date" => "21.05.2018","category" => "Учёба","done" => "Да"],
-    ["task" => "Встреча с другоми","date" => "22.04.2018","category" => "Входящие","done" => "Нет"],
-    ["task" => "Купить корм для кота","date" => null,"category" => "Домашние дела","done" => "Нет"],
-    ["task" => "Заказать пиццу","date" => null,"category" => "Работа","done" => "Нет"]
-];
+
+
 //Показ выполненных задач
 $filtered_tasks = [];
 $category_active = 0;
@@ -36,7 +40,8 @@ $layout = output_page('template/layout.php', [
         'categorys' => $categorys,
         'category_active' => $category_active,
         'content' => $index,
-        'tasks' => $tasks
+        'tasks' => $tasks,
+        'count_task_by_user_id' => $count_task_by_user_id
 ]);
 
 print($layout);

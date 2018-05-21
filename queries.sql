@@ -1,13 +1,13 @@
 use business_is_all_right;
 
-INSERT INTO projects (name_projects) VALUE ('Всё');
-INSERT INTO projects (name_projects) VALUE ('Входящие');
-INSERT INTO projects (name_projects) VALUE ('Работа');
-INSERT INTO projects (name_projects) VALUE ('Домашние дела');
-INSERT INTO projects (name_projects) VALUE ('Учёба');
-
 INSERT INTO users (date_registration_users, email_users,  name_users, password_users, contact_users) VALUE ('2017-05-15', 'ignat.v@gmail.com', 'Игнат','$2y$10$OqvsKHQwr0Wk6FMZDoHo1uHoXd4UdxJG/5UDtUiie00XaxMHrW8ka','Phone:12211');
 INSERT INTO users (date_registration_users, email_users,  name_users, password_users, contact_users) VALUE ('2017-05-12', 'kitty_93@li.ru', 'Леночка','$2y$10$bWtSjUhwgggtxrnJ7rxmIe63ABubHQs0AS0hgnOo41IEdMHkYoSVa','Phone:12213');
+
+INSERT INTO projects (name_projects,id_users) VALUE ('Исходящие',1);
+INSERT INTO projects (name_projects,id_users) VALUE ('Входящие',1);
+INSERT INTO projects (name_projects,id_users) VALUE ('Работа',1);
+INSERT INTO projects (name_projects,id_users) VALUE ('Домашние дела',1);
+INSERT INTO projects (name_projects,id_users) VALUE ('Учёба',1);
 
 INSERT INTO task (id_users,  id_projects , date_create_task, date_achievement_task, name_task,  file_task, term_task, done_task ) VALUE (1,3, '2018-05-12', '2018-06-17','Собеседование в IT комании',null,'2018-05-25', false);
 INSERT INTO task (id_users,  id_projects , date_create_task, date_achievement_task, name_task,  file_task, term_task, done_task ) VALUE (2,2, '2018-06-14', '2018-05-30','Выполнить тестовое задание',null,'2018-05-18', false);
@@ -26,8 +26,5 @@ INSERT INTO task (id_users,  id_projects , date_create_task, date_achievement_ta
 SELECT id_projects FROM task WHERE id_users = 1;
 SELECT name_task FROM task WHERE id_projects = 2 AND id_users = 1;
 UPDATE task SET done_task = true WHERE id_task = 2;
-SELECT name_task FROM task WHERE term_task = '2018-05-18' BETWEEN '2018-05-18 00:00:00' AND '2018-05-18 23:59:59'  ;
+SELECT name_task FROM task WHERE term_task between '2018-05-18 00:00:00' AND '2018-05-18 23:59:59';
 UPDATE task SET name_task = 'Стать бекендером' WHERE id_task = 12;
-
-
-
