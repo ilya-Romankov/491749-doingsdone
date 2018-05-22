@@ -11,8 +11,13 @@ function catygorys_db(int $id_user, mysqli $con) {
     return $rows;
 }
 
-function task_db(int $id_user, mysqli $con) {
-    $sql = "SELECT id_task ,id_users ,id_projects ,date_create_task ,date_achievement_task ,name_task,file_task ,term_task ,done_task  FROM task  WHERE id_users = ?";
+function task_db(int $id_user, bool $show_complete_tasks, mysqli $con) {
+    if ($show_complete_tasks) {
+        $sql = "SELECT id_task ,id_users ,id_projects ,date_create_task ,date_achievement_task ,name_task,file_task ,term_task ,done_task  FROM task  WHERE id_users = ?";
+    }
+    else {
+        $sql = "SELECT id_task ,id_users ,id_projects ,date_create_task ,date_achievement_task ,name_task,file_task ,term_task ,done_task  FROM task  WHERE id_users = ? AND done_task = false";
+    }
     $stmt = db_get_prepare_stmt($con, $sql, [$id_user]);
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_get_result($stmt);
