@@ -42,13 +42,13 @@
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
                     <!--Вывод меню -->
-                    <li class="main-navigation__list-item<?= ($category_active == $category_index) ? ' main-navigation__list-item--active' : '' ?>">
-                            <a class="main-navigation__list-item-link" href="#">Всё</a>
+                    <li class="main-navigation__list-item<?= ($category_active == PROJECT_ALL) ? ' main-navigation__list-item--active' : '' ?>">
+                            <a class="main-navigation__list-item-link" href="/">Всё</a>
                             <span class="main-navigation__list-item-count"><?=$count_task_by_user_id[PROJECT_ALL];?></span>
                         </li>
-                    <?php foreach($categorys as $category_index => $category):?>
-                        <li class="main-navigation__list-item <?= ($category_active == $category_index) ? ' main-navigation__list-item--active' : '' ?>">
-                            <a class="main-navigation__list-item-link" href="#"><?= $category['name_projects'] ;?></a>
+                    <?php foreach($categorys as $category):?>
+                        <li class="main-navigation__list-item <?= ($category_active == $category['id_projects']) ? ' main-navigation__list-item--active' : '' ?>">
+                            <a class="main-navigation__list-item-link" href="/?id_projects=<?=$category['id_projects']?>"><?= $category['name_projects'] ;?></a>
                             <span class="main-navigation__list-item-count"><?=($count_task_by_user_id[$category['id_projects']]) ?? 0  ;?></span>
                         </li>
                     <?php endforeach;?>
