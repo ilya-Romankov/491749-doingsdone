@@ -2,6 +2,7 @@
 require_once ('init.php');
 $user_id = 1;
 $show_complete_tasks = rand(0, 1);
+
 $category_active = PROJECT_ALL;
 
 $categorys = catygorys_db($user_id, $connect); 
