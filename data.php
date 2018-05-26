@@ -1,7 +1,5 @@
 <?php 
-
 define("PROJECT_ALL",-1);
-
 function catygorys_db(int $id_user, mysqli $con) {
     $sql = "SELECT name_projects, id_projects FROM projects  WHERE id_users = ?";
     $stmt = db_get_prepare_stmt($con, $sql, [$id_user]);
@@ -10,21 +8,26 @@ function catygorys_db(int $id_user, mysqli $con) {
     $rows = mysqli_fetch_all($res, MYSQLI_ASSOC);
     return $rows;
 }
-
-function task_db(int $id_user, bool $show_complete_tasks, mysqli $con) {
-    if ($show_complete_tasks) {
-        $sql = "SELECT id_task ,id_users ,id_projects ,date_create_task ,date_achievement_task ,name_task,file_task ,term_task ,done_task  FROM task  WHERE id_users = ?";
+function task_db(int $id_user, int $id_project, bool $show_complete_tasks, mysqli $con) {
+    $sql_base = 'SELECT id_task ,id_users ,id_projects ,date_create_task ,date_achievement_task ,name_task,file_task ,term_task ,done_task  FROM task';
+    $where_array = [];
+    $params_array = [];
+    $where_array[] = 'id_users = ?';
+    $params_array[] = $id_user;
+    if (! $show_complete_tasks) {
+        $where_array[] = 'done_task = false';
     }
-    else {
-        $sql = "SELECT id_task ,id_users ,id_projects ,date_create_task ,date_achievement_task ,name_task,file_task ,term_task ,done_task  FROM task  WHERE id_users = ? AND done_task = false";
+    if ($id_project !== PROJECT_ALL) {
+        $where_array[] = 'id_projects = ?';
+        $params_array[] = $id_project;
     }
-    $stmt = db_get_prepare_stmt($con, $sql, [$id_user]);
+    $sql = $sql_base . ' WHERE ' . implode(' AND ', $where_array);
+    $stmt = db_get_prepare_stmt($con, $sql, $params_array);
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_get_result($stmt);
     $rows = mysqli_fetch_all($res, MYSQLI_ASSOC);
     return $rows;
 }
-
 function get_count_tasks_by_user(int $user_id, mysqli $con){
     $sql = "SELECT id_projects, count(*) as cnt FROM task WHERE id_users = ? group by id_projects";
     $mysqli_stmt =  db_get_prepare_stmt($con,$sql,[$user_id]);
@@ -39,7 +42,6 @@ function get_count_tasks_by_user(int $user_id, mysqli $con){
     $result[PROJECT_ALL] = $all_count;
     return $result;
 }
-
 
 
 
