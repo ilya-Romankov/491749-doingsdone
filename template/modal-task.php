@@ -19,7 +19,7 @@
 
       <select class="form__input form__input--select <?= isset($massiv_errors['project']) ? "form__input--error" : ""?>" name="project" id="project">
         <?php foreach($categorys as $category):?>
-          <option <?=($category['id_projects'] == $last_post['project'] ? "selected":"" )?>
+          <option <?=(isset($last_post['project']) && $category['id_projects'] == $last_post['project'] ? "selected":"" )?>
           value="<?=$category['id_projects']?>"><?= $category['name_projects'] ;?></option>
         <?php endforeach;?>
       </select>
