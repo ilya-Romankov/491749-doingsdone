@@ -13,6 +13,42 @@ function catygorys_db(int $id_user, mysqli $con) {
     return $result;
 }
 
+
+function check_mail(string $mail,mysqli $con) {
+    $sql = "SELECT email_users FROM users  WHERE email_users = ?";
+    $stmt = db_get_prepare_stmt($con, $sql, [$mail]);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
+    $rows = mysqli_fetch_all($res, MYSQLI_ASSOC);
+
+    return count($rows) > 0;
+}
+
+function insert_user(array $user_data, $con) {
+    
+   $sql = "INSERT INTO users (
+       date_registration_users,
+       email_users,  
+       name_users, 
+       password_users, 
+       contact_users) 
+    VALUE (?,?,?,?,?)";
+
+    $stmt = db_get_prepare_stmt($con, $sql, [
+        $user_data['date_registration_users'],
+        $user_data['email_users'],
+        $user_data['name_users'],
+        $user_data['password_users'],
+        $user_data['contact_users']
+    ]);
+
+    if(mysqli_stmt_execute($stmt)) {
+        return mysqli_insert_id($con);
+    }
+    return false;
+
+}
+
 function insert_task(array $task, mysqli $con) {
 
     $sql="INSERT INTO task (
