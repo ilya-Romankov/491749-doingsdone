@@ -6,8 +6,40 @@ function catygorys_db(int $id_user, mysqli $con) {
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_get_result($stmt);
     $rows = mysqli_fetch_all($res, MYSQLI_ASSOC);
-    return $rows;
+    $result = [];
+    foreach($rows as $project) {
+        $result[$project['id_projects']] = $project;
+    }
+    return $result;
 }
+
+function insert_task(array $task, mysqli $con) {
+
+    $sql="INSERT INTO task (
+        id_users,  
+        id_projects , 
+        date_create_task, 
+        name_task,  
+        file_task, 
+        term_task, 
+        done_task ) VALUE 
+        (?,?,?,?,?,?,".((bool)$task['done_task'] ? "true" : "false") .")";
+    $stmt = db_get_prepare_stmt($con, $sql, [
+        (int)$task['id_users'],
+        (int)$task['id_projects'] ,
+        $task['date_create_task'],     
+        $task['name_task'],  
+        $task['file_task'], 
+        $task['term_task'],
+    ]);
+    
+
+    if(mysqli_stmt_execute($stmt)) {
+        return mysqli_insert_id($con);
+    }
+    return false;
+}
+
 function task_db(int $id_user, int $id_project, bool $show_complete_tasks, mysqli $con) {
     $sql_base = 'SELECT id_task ,id_users ,id_projects ,date_create_task ,date_achievement_task ,name_task,file_task ,term_task ,done_task  FROM task';
     $where_array = [];
