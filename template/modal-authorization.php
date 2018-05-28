@@ -7,9 +7,9 @@
     <div class="form__row">
       <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
-      <input class="form__input <?=$massiv_errors['email'] ? "form__input--error" : ""?>" type="text" name="email" id="email" 
+      <input class="form__input <?=$massiv_errors['password'] ? "form__input--error" : ""?>" type="text" name="email" id="email" 
       value="<?=isset($last_post['email']) ? htmlspecialchars($last_post['email']) : "" ?>" placeholder="Введите e-mail">
-      <?php if (isset($massiv_errors['email'])): ?>
+      <?php if (isset($massiv_errors['password'])): ?>
          <p class="form__message"><?=$massiv_errors['password']?></p>
       <?php endif;?>
     </div>

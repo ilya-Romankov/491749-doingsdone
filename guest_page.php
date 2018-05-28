@@ -51,10 +51,21 @@ $modal_authorization = output_page('template/modal-authorization.php',[
     'massiv_errors' => $massiv_errors,
     'last_post' => $_POST
 ]);
+
 $guest = output_page('template/guest.php',[
-    'overlay_class' => $overlay_class,
-    'name_page' => $name_page,
     'modal_authorization' => $modal_authorization,
-    'user' => $_SESSION['user'] ?? NULL
+    'hidden' => $hidden,
+    'name_page' =>  'Дела в порядке',
+    'massiv_errors' => $massiv_errors,
+    'last_post' => $_POST,
+    'overlay_class' => $overlay_class,
+    'user' => $_SESSION['user']
 ]);
-print($guest);
+
+$layout = output_page('template/layout.php', [
+    'user' => $_SESSION['user'],
+    'guest' => $guest
+]);
+
+print($layout);
+

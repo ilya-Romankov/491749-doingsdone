@@ -94,20 +94,26 @@ $modal_task = output_page('template/modal-task.php', [
     'massiv_errors' => $massiv_errors,
     'last_post' => $_POST
 ]);
-$index = output_page('template/index.php',[
+
+$index2  = output_page('template/index.php',[
     'show_complete_tasks' =>$show_complete_tasks ,
-    'tasks' => $tasks
+    'tasks' => $tasks,
+]);
+
+$index = output_page('template/index_template.php',[
+    'categorys' => $categorys,
+    'category_active' => $category_active,
+    'content' => $index2,
+    'modal_task' => $modal_task,
+    'name' => $name,
+    'count_task_by_user_id' => $count_task_by_user_id
 ]);
 $layout = output_page('template/layout.php', [
         'name_page' =>  'Дела в порядке',
         'overlay_class' => $overlay_class,
-        'categorys' => $categorys,
-        'category_active' => $category_active,
-        'content' => $index,
-        'tasks' => $tasks,
-        'modal_task' => $modal_task,
-        'count_task_by_user_id' => $count_task_by_user_id,
-        'name' => $name 
+        'index' => $index,
+        'content' => $content,
+        'user' => $_SESSION['user']
 ]);
 print($layout);
 
