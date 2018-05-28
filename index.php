@@ -1,6 +1,10 @@
 <?php
 require_once ('init.php');
-$user_id = 1;
+if (!isset($_SESSION['user'])) {
+        header ('Location:guest_page.php');
+}
+$user_id = $_SESSION['user']['id_users'];
+$name = $_SESSION['user']['name_users'];
 $show_complete_tasks = rand(0, 1);
 $category_active = PROJECT_ALL;
 $categorys = catygorys_db($user_id, $connect); 
@@ -83,7 +87,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
 }
 
 $tasks = task_db($user_id, $category_active, (bool)$show_complete_tasks, $connect);
-$count_task_by_user_id = get_count_tasks_by_user(1,$connect);
+$count_task_by_user_id = get_count_tasks_by_user($user_id,$connect);
 $modal_task = output_page('template/modal-task.php', [
     'categorys' => $categorys,
     'hidden' => $hidden,
@@ -102,7 +106,8 @@ $layout = output_page('template/layout.php', [
         'content' => $index,
         'tasks' => $tasks,
         'modal_task' => $modal_task,
-        'count_task_by_user_id' => $count_task_by_user_id 
+        'count_task_by_user_id' => $count_task_by_user_id,
+        'name' => $name 
 ]);
 print($layout);
 

@@ -3,12 +3,12 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title><?=$name_page?></title>
   <link rel="stylesheet" href="../css/normalize.css">
   <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body class="body-background"><!--class="overlay"-->
+<body class = "body-background <?=$overlay_class ? "overlay": "" ;?>"><!--class="overlay"-->
   <h1 class="visually-hidden">Дела в порядке</h1>
 
   <div class="page-wrapper">
@@ -46,9 +46,9 @@
 
         <p>Веб-приложение для удобного ведения списка дел.</p>
       </div>
-
-      <a class="main-footer__button button button--plus">Добавить задачу</a>
-
+      <?php if (isset($user)):?>
+        <a class="main-footer__button button button--plus">Добавить задачу</a>
+      <?php endif;?>
       <div class="main-footer__social social">
         <span class="visually-hidden">Мы в соцсетях:</span>
         <a class="social__link social__link--facebook" href="#">Facebook
@@ -77,5 +77,6 @@
       </div>
     </div>
   </footer>
+  <?=$modal_authorization?>
 </body>
 </html>

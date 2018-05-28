@@ -1,5 +1,6 @@
 <?php
 //Настройка проекта
+session_start();
 require_once ('function.php');
 require_once ('mysql_helper.php');
 require_once ('data.php');

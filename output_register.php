@@ -1,6 +1,7 @@
 <?php
  //регистрация 
  require_once ('init.php');
+ $name_page = "Регистрация";
  $massiv_errors = [];
  if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
  $requeare_fields_register = ['email','password','name'];
@@ -17,7 +18,7 @@
      elseif ( filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) === false) {
          $massiv_errors['email'] = "Введите email корректно(testmail@domen.ru)";
      }
-     elseif (check_mail($_POST['email'],$connect)) {
+     elseif (get_user_by_email($_POST['email'],$connect)) {
         $massiv_errors['email'] = "Такой email существует";
      }
  }
@@ -50,13 +51,14 @@
         ]);
         exit();
     }
-    header('Location: guest.php');
+    header('Location: guest_page.php');
         exit();
  }
 }
 
  $register_page = output_page('template/register.php',[
      'massiv_errors' => $massiv_errors,
-     'last_post' => $_POST
+     'last_post' => $_POST,
+     'name_page' =>$name_page
  ]);
  print($register_page);

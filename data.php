@@ -13,16 +13,17 @@ function catygorys_db(int $id_user, mysqli $con) {
     return $result;
 }
 
-
-function check_mail(string $mail,mysqli $con) {
-    $sql = "SELECT email_users FROM users  WHERE email_users = ?";
+function  get_user_by_email(string $mail,mysqli $con) {
+    $sql = "SELECT * FROM users  WHERE  email_users =  ?";
     $stmt = db_get_prepare_stmt($con, $sql, [$mail]);
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_get_result($stmt);
-    $rows = mysqli_fetch_all($res, MYSQLI_ASSOC);
-
-    return count($rows) > 0;
+    return mysqli_fetch_array($res);
+    
 }
+
+
+
 
 function insert_user(array $user_data, $con) {
     

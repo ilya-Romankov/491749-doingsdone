@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title><?=$name_page?></title>
   <link rel="stylesheet" href="../css/normalize.css">
   <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -14,7 +14,7 @@
   <div class="page-wrapper">
     <div class="container container--with-sidebar">
       <header class="main-header">
-        <a href="#">
+        <a href="guest_page.php">
           <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
         </a>
       </header>
