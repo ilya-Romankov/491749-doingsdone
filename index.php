@@ -25,6 +25,7 @@ $massiv_errors = [];
 $hidden = true;
 $overlay_class = false;
 if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
+    //Добавление задачи
     $requeare_fields = ['name','project'];
     foreach($requeare_fields as $field) {
         if(!isset($_POST[$field])) {
@@ -75,10 +76,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ) {
             ]);
             exit();
         }
-        header('Location: /');
+        header('Location: guest.php');
         exit();
-    }    
+    }  
+    
 }
+
 $tasks = task_db($user_id, $category_active, (bool)$show_complete_tasks, $connect);
 $count_task_by_user_id = get_count_tasks_by_user(1,$connect);
 $modal_task = output_page('template/modal-task.php', [
@@ -102,3 +105,5 @@ $layout = output_page('template/layout.php', [
         'count_task_by_user_id' => $count_task_by_user_id 
 ]);
 print($layout);
+
+
