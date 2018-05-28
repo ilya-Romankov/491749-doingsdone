@@ -33,7 +33,8 @@
             <div class="form__row">
               <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
-              <input class="form__input <?= isset($massiv_errors['email']) ? "form__input--error" : "" ?>" type="text" name="email" id="email" value="<?=$last_post['email']?>" placeholder="Введите e-mail">
+              <input class="form__input <?= isset($massiv_errors['email']) ? "form__input--error" : "" ?>" type="text" name="email" id="email" 
+              value="<?=isset($last_post['email']) ? htmlspecialchars($last_post['email']) : "" ?>" placeholder="Введите e-mail">
               <?php if (isset($massiv_errors['email'])): ?>
                 <p class="form__message"><?=$massiv_errors['email']?></p>
               <?php endif;?>
@@ -42,7 +43,8 @@
             <div class="form__row">
               <label class="form__label" for="password">Пароль <sup>*</sup></label>
 
-              <input class="form__input <?= isset($massiv_errors['password']) ? "form__input--error" : "" ?>" type="password" name="password" id="password" value="<?=$last_post['password']?>" placeholder="Введите пароль">
+              <input class="form__input <?= isset($massiv_errors['password']) ? "form__input--error" : "" ?>" type="password" name="password" id="password" 
+              value="<?=isset($last_post['password']) ? htmlspecialchars($last_post['password']) : ""?>" placeholder="Введите пароль">
             </div>
             <?php if (isset($massiv_errors['password'])): ?>
               <p class="form__message"><?=$massiv_errors['password']?></p>
@@ -51,7 +53,8 @@
             <div class="form__row">
               <label class="form__label" for="name">Имя <sup>*</sup></label>
 
-              <input class="form__input <?= isset($massiv_errors['name']) ? "form__input--error" : "" ?>" type="text" name="name" id="name" value="<?=$last_post['name']?>" placeholder="Введите имя">
+              <input class="form__input <?= isset($massiv_errors['name']) ? "form__input--error" : "" ?>" type="text" name="name" id="name" 
+              value="<?=isset($last_post['name'])? htmlspecialchars($last_post['name']) : "" ?>" placeholder="Введите имя">
             </div>
             <?php if (isset($massiv_errors['password'])): ?>
               <p class="form__message"><?=$massiv_errors['name']?></p>
