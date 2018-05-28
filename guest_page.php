@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
 }
 
 $modal_authorization = output_page('template/modal-authorization.php',[
-    'hidden' => $hiddens,
+    'hidden' => $hidden,
     'massiv_errors' => $massiv_errors,
     'last_post' => $_POST
 ]);
